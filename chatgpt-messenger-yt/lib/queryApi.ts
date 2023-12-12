@@ -10,8 +10,10 @@ const query = async (prompt: string, chatId: string, model: string) => {
       max_tokens: 1000,
       frequency_penalty: 0,
       presence_penalty: 0,
+      stream: false,
+      n: 1,
     })
-    .then((res) => res.choices[0].text)
+    .then((res) => res.choices.map((choice: any) => choice.text)[0])
     .catch(
       (err) =>
         `ChatGPT was unable to find an answer for that! {Error: ${err.message}}`,
